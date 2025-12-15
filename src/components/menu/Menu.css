@@ -1,0 +1,119 @@
+/* =========================
+   CONTENEDOR DEL MENÚ
+========================= */
+.main-menu{
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background: rgba(11, 18, 32, 0.7);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   LISTA PRINCIPAL
+========================= */
+.main-menu ul{
+  list-style: none;
+  margin: 0;
+  padding: 14px 24px;
+
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+}
+
+/* =========================
+   LINKS
+========================= */
+.main-menu a{
+  text-decoration: none;
+  color: var(--text);
+
+  padding: 10px 16px;
+  border-radius: 12px;
+
+  font-weight: 500;
+  letter-spacing: 0.3px;
+
+  border: 1px solid transparent;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+/* =========================
+   HOVER / FOCUS
+========================= */
+.main-menu a:hover,
+.main-menu a:focus-visible{
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  outline: none;
+}
+
+/* =========================
+   LINK ACTIVO (opcional)
+========================= */
+.main-menu a.active{
+  background: rgba(90, 122, 255, 0.18);
+  border-color: rgba(90, 122, 255, 0.45);
+  box-shadow: 0 6px 20px rgba(90, 122, 255, 0.25);
+}
+
+/* =========================
+   RESPONSIVE (MÓVIL)
+========================= */
+@media (max-width: 600px){
+  .main-menu ul{
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .main-menu a{
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================
+   BOTÓN VER EVENTOS
+========================= */
+.events-btn{
+  display: inline-block;
+  margin-top: 18px;
+
+  text-decoration: none;
+  text-align: center;
+
+  padding: 10px 18px;
+  border-radius: 14px;
+
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    box-shadow var(--transition);
+}
+
+.events-btn:hover{
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}

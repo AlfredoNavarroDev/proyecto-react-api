@@ -1,43 +1,80 @@
-/* App.css */
+/* =========================
+   VARIABLES GLOBALES
+========================= */
 :root{
   --bg: #0b1220;
   --card: rgba(255, 255, 255, 0.06);
+  --card-hover: rgba(255, 255, 255, 0.09);
   --text: #e8eefc;
   --muted: rgba(232, 238, 252, 0.7);
   --border: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.25);
   --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 18px 45px rgba(0, 0, 0, 0.45);
+  --radius: 18px;
+  --transition: 160ms ease;
 }
 
-*{
+/* =========================
+   RESET BÁSICO
+========================= */
+*,
+*::before,
+*::after{
   box-sizing: border-box;
 }
 
 body{
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: radial-gradient(1000px 600px at 20% 10%, rgba(90, 122, 255, 0.18), transparent),
-              radial-gradient(900px 500px at 80% 30%, rgba(0, 200, 255, 0.12), transparent),
-              var(--bg);
+  background:
+    radial-gradient(1000px 600px at 20% 10%, rgba(90, 122, 255, 0.18), transparent),
+    radial-gradient(900px 500px at 80% 30%, rgba(0, 200, 255, 0.12), transparent),
+    var(--bg);
   color: var(--text);
+  line-height: 1.4;
 }
 
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
 .app{
   min-height: 100vh;
+  padding: 32px 20px;
+
   display: grid;
-  place-items: center;
-  padding: 28px 16px;
+  gap: 26px;
+
+  /* Grid automático para múltiples artistas */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  align-items: start;
 }
 
+/* =========================
+   CARD DEL ARTISTA
+========================= */
 .card{
-  width: min(820px, 100%);
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 22px;
-  backdrop-filter: blur(10px);
+
+  backdrop-filter: blur(12px);
+  transition: transform var(--transition),
+              box-shadow var(--transition),
+              background var(--transition);
 }
 
+.card:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  background: var(--card-hover);
+}
+
+/* =========================
+   HEADER DEL ARTISTA
+========================= */
 .header{
   display: flex;
   align-items: center;
@@ -47,66 +84,242 @@ body{
 
 .header h2{
   margin: 0;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
   letter-spacing: 0.3px;
 }
 
+/* =========================
+   IMAGEN DEL ARTISTA
+========================= */
 .cover{
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   border-radius: 16px;
   object-fit: cover;
   border: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
+/* =========================
+   SECCIÓN REDES
+========================= */
 .section-title{
-  margin: 22px 0 10px;
-  font-size: 1.1rem;
+  margin: 22px 0 12px;
+  font-size: 1rem;
   color: var(--muted);
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
+/* =========================
+   LISTA DE LINKS
+========================= */
 .links{
   list-style: none;
   padding: 0;
   margin: 0;
+
   display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 .links li a{
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 12px 14px;
   border-radius: 14px;
   text-decoration: none;
+
   color: var(--text);
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.04);
-  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+
+  transition: transform var(--transition),
+              background var(--transition),
+              border-color var(--transition),
+              box-shadow var(--transition);
+
   text-transform: capitalize;
+  font-weight: 500;
 }
 
 .links li a:hover{
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-strong);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
+/* =========================
+   ESTADO DE CARGA
+========================= */
 .loading{
   min-height: 100vh;
   display: grid;
   place-items: center;
   color: var(--muted);
   font-size: 1.05rem;
+  letter-spacing: 0.3px;
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
 @media (max-width: 520px){
-  .cover{
-    width: 140px;
-    height: 140px;
+  .app{
+    padding: 24px 14px;
+    gap: 20px;
   }
+
   .card{
     padding: 18px;
+  }
+
+  .cover{
+    width: 120px;
+    height: 120px;
+  }
+
+  .header{
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.links li a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.links .icon{
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.links .text{
+  line-height: 1;
+}
+
+.events{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.event-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+}
+
+.event-item p{
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.event-item a{
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: background 150ms ease;
+}
+
+.event-item a:hover{
+  background: rgba(255,255,255,0.1);
+}
+
+/* =========================
+   HOME
+========================= */
+.home{
+  min-height: calc(100vh - 80px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.home-card{
+  max-width: 620px;
+  text-align: center;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+
+  padding: 36px 28px;
+}
+
+.home-title{
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 700;
+}
+
+.home-title span{
+  background: linear-gradient(90deg, #5a7aff, #00c8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-subtitle{
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* BOTÓN PRINCIPAL */
+.home-btn{
+  display: inline-block;
+  text-decoration: none;
+
+  padding: 12px 22px;
+  border-radius: 14px;
+
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform var(--transition),
+    background var(--transition),
+    box-shadow var(--transition);
+}
+
+.home-btn:hover{
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+
+/* RESPONSIVE */
+@media (max-width: 520px){
+  .home-card{
+    padding: 28px 20px;
+  }
+
+  .home-title{
+    font-size: 1.8rem;
   }
 }
