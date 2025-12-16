@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import axios from "axios"
 import LinksTabs from "./LinksTabs"
+import usePetition from "../hooks/usePetition"
 
 function ArtistCard({ artistName }) {
 
-  const base_url = import.meta.env.VITE_BASE_URL_BANDSINTOWN
-  const app_id = import.meta.env.VITE_APP_ID_BANDSINTOWN
-
-  const [artistData, setArtistData] = useState(null)
-
-  useEffect(() => {
-    axios.get(`${base_url}${artistName}${app_id}`)
-      .then(res => setArtistData(res.data))
-      .catch(err => console.error("Error:", err))
-  }, [artistName])
+  const artistData = usePetition(`${artistName}`)
 
   if (!artistData) {
     return <p className="loading">Cargando {artistName}...</p>
